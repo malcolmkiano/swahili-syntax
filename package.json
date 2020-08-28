@@ -1,0 +1,36 @@
+{
+  "name": "swahili-syntax",
+  "displayName": "Swahili Syntax Highlighter",
+  "description": "Syntax highlighter for the Swahili programming language",
+  "version": "1.0.0",
+  "publisher": "swahili-lang",
+  "repository": "https://github.com/malcolmkiano/swahili-syntax",
+  "engines": {
+    "vscode": "^1.48.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "swahili",
+        "aliases": [
+          "swahili",
+          "swahili"
+        ],
+        "extensions": [
+          ".swh"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "swahili",
+        "scopeName": "source.swh",
+        "path": "./syntaxes/swahili.tmLanguage.json"
+      }
+    ]
+  }
+}
