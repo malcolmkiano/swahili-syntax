@@ -4,7 +4,7 @@
   "description": "Syntax highlighter for the Swahili programming language",
   "version": "0.1.0",
   "publisher": "swahili-lang",
-  "icon": "assets/icon.png", 
+  "icon": "https://raw.githubusercontent.com/malcolmkiano/swahili-syntax/master/assets/icon.png", 
   "repository": "https://github.com/malcolmkiano/swahili-syntax",
   "engines": {
     "vscode": "^1.48.0"
