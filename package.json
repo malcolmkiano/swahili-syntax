@@ -2,7 +2,7 @@
   "name": "swahili-syntax",
   "displayName": "Swahili Syntax Highlighter",
   "description": "Syntax highlighter for the Swahili programming language",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "publisher": "swahili-lang",
   "icon": "assets/icon.png",
   "repository": "https://github.com/malcolmkiano/swahili-syntax",
