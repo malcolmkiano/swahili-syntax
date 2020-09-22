@@ -1,4 +1,5 @@
 {
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
   "name": "Swahili",
   "scopeName": "source.swh",
   "fileTypes": ["swh"],
@@ -21,31 +22,16 @@
           "include": "#doublequotestring"
         },
         {
-          "include": "#function"
+          "include": "#operators"
         },
         {
-          "include": "#functioncall"
+          "include": "#punctuation"
         },
         {
-          "include": "#ifblock"
+          "include": "#keywords"
         },
         {
-          "include": "#forblock"
-        },
-        {
-          "include": "#whileblock"
-        },
-        {
-          "include": "#operator"
-        },
-        {
-          "include": "#control"
-        },
-        {
-          "include": "#keyword"
-        },
-        {
-          "include": "#variable"
+          "include": "#identifiers"
         }
       ]
     },
@@ -70,11 +56,11 @@
     },
     "constant": {
       "name": "constant.language.swh",
-      "match": "tupu|kweli|uwongo"
+      "match": "\\b(tupu|kweli|uwongo)\\b"
     },
     "number": {
       "name": "constant.numeric.swh",
-      "match": "(?<![\\d.])\\s0x[a-fA-F\\d]+|\\b\\d+(\\.\\d+)?([eE]-?\\d+)?|\\.\\d+([eE]-?\\d+)?"
+      "match": "\\b[0-9]+(\\.[0-9]+)?\\b"
     },
     "doublequotestring": {
       "name": "string.quoted.double.swh",
@@ -97,125 +83,133 @@
         }
       ]
     },
-    "function": {
-      "name": "meta.function.swh",
-      "begin": "\\b(shughuli)(\\s+(((\\w(\\w|\\d)*)\\.)*(\\w(\\w|\\d)*)))?\\s*(\\()((\\.\\.\\.|\\w(\\w|\\d)*)(,\\s*(\\.\\.\\.|\\w(\\w|\\d)*))*)?(\\))",
-      "beginCaptures": {
-        "1": {
-          "name": "keyword.other.swh"
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.arithmetic.swh",
+          "match": "\\b(\\+|\\-|%|\\*|\\/|\\^)\\b"
         },
-        "3": {
-          "name": "entity.name.function.swh"
+        {
+          "name": "keyword.operator.logical.swh",
+          "match": "\\b(==|<=|>=|<|>|&&|\\|\\|)\\b"
         },
-        "10": {
-          "name": "variable.parameter.function.swh"
-        }
-      },
-      "end": "end",
-      "endCaptures": {
-        "0": {
-          "name": "keyword.control.swh"
-        }
-      },
-      "patterns": [
         {
-          "include": "#general"
+          "name": "keyword.operator.assignment.swh",
+          "match": "\\b(=|:)\\b"
+        },
+        {
+          "name": "punctuation.accessor.swh",
+          "match": "\\."
         }
       ]
     },
-    "libfunctioncall": {
-      "name": "meta.functioncall.swh",
-      "match": "\\b(andika|soma|somaNambari|futa|niNambari|niJina|niOrodha|niShughuli|niTupu|Nambari|Jina|Tarehe|idadi|badili|anza|wamlambez))\\b(?=\\()",
-      "beginCaptures": {
-        "1": {
-          "name": "support.function.swh"
-        }
-      },
-      "end": "\\)",
+    "punctuation": {
       "patterns": [
         {
-          "include": "#general"
+          "name": "punctuation.separator",
+          "match": ","
+        },
+        {
+          "include": "#groups"
         }
       ]
     },
-    "functioncall": {
-      "name": "meta.functioncall.swh",
-      "begin": "((\\w(\\w|\\d)*[\\.:])*\\w(\\w|\\d)*)\\(",
-      "beginCaptures": {
-        "1": {
-          "name": "entity.name.function.swh"
-        }
-      },
-      "end": "\\)",
+    "keywords": {
       "patterns": [
         {
-          "include": "#general"
+          "name": "storage.type.function.swh",
+          "match": "\\bshughuli\\b"
+        },
+        {
+          "name": "storage.type.swh",
+          "match": "\\bwacha\\b"
+        },
+        {
+          "name": "keyword.control.swh",
+          "match": "\\b(ondoka|sivyo|kwa|mpaka|kama|au|rudisha|katika|ambapo|endelea|tupa|jaribu|iwapo|mwishowe)\\b"
         }
       ]
     },
-    "ifblock": {
-      "name": "meta.ifblock.swh",
-      "begin": "\\bkama\\b",
-      "beginCaptures": {
-        "0": {
-          "name": "keyword.control.swh"
-        }
-      },
-      "end": "\\bend\\b",
-      "endCaptures": {
-        "0": {
-          "name": "keyword.control.swh"
-        }
-      },
+    "identifiers": {
       "patterns": [
         {
-          "include": "#general"
+          "name": "meta.functioncall.swh",
+          "match": "\\b([_A-Za-z][_A-Za-z0-9]*)\\b(?=\\()",
+          "captures": {
+            "1": {
+              "name": "entity.name.function.swh"
+            }
+          }
+        },
+        {
+          "name": "variable.other.swh",
+          "match": "([A-Za-z_][A-Za-z0-9_]*)"
         }
       ]
     },
-    "forblock": {
-      "name": "meta.forblock.swh",
-      "begin": "\\bkwa\\b",
-      "beginCaptures": {
-        "0": {
-          "name": "keyword.control.swh"
-        }
-      },
+    "groups": {
       "patterns": [
         {
-          "include": "#general"
-        }
-      ]
-    },
-    "whileblock": {
-      "name": "meta.whileblock.swh",
-      "begin": "\\bambapo\\b",
-      "beginCaptures": {
-        "0": {
-          "name": "keyword.control.swh"
-        }
-      },
-      "patterns": [
+          "name": "meta.group",
+          "begin": "\\(",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.group.begin.swh"
+            }
+          },
+          "end": "\\)",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.group.end.swh"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#general"
+            }
+          ]
+        },
         {
-          "include": "#general"
+          "name": "meta.block",
+          "begin": "{",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.block.begin.swh"
+            }
+          },
+          "end": "}",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.block.end.swh"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#general"
+            }
+          ]
+        },
+        {
+          "name": "meta.brackets",
+          "begin": "\\[",
+          "beginCaptures": {
+            "0": {
+              "name": "punctuation.section.brackets.begin.swh"
+            }
+          },
+          "end": "\\]",
+          "endCaptures": {
+            "0": {
+              "name": "punctuation.section.brackets.end.swh"
+            }
+          },
+          "patterns": [
+            {
+              "include": "#general"
+            }
+          ]
         }
       ]
-    },
-    "operator": {
-      "name": "keyword.operator.swh",
-      "match": "(\\+|-|%|\\*|\\/|\\^|==|<=|>=|<|>|&&|\\|\\|)"
-    },
-    "control": {
-      "name": "keyword.control.swh",
-      "match": "\\b(ondoka|sivyo|kwa|mpaka|kama|au|rudisha|katika|ambapo|endelea)\\b"
-    },
-    "keyword": {
-      "name": "keyword.other.swh",
-      "match": "\\b(wacha|shughuli)\\b"
-    },
-    "variable": {
-      "name": "variable.other.swh",
-      "match": "([A-Za-z_][A-Za-z0-9_]*)"
     }
   },
   "patterns": [
